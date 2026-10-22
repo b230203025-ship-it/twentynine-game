@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #1b1a38;
+  --color-cloth: #24224b;
+  --color-cloth-2: #34316a;
+  --color-saffron: #f0a93b;
+  --color-paper: #f3efe4;
+  --color-rose: #c8413b;
+  --color-mint: #6cc3b5;
+  --color-mute: #a9a6d3;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+}
+
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  background: var(--color-ink);
+  color: var(--color-paper);
+  font-family: var(--font-sans);
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+input, textarea { user-select: text; }
+
+/* block-printed cloth: the one decorative moment */
+.cloth {
+  background-color: var(--color-cloth);
+  background-image:
+    radial-gradient(circle at 50% 50%, rgba(240,169,59,.10) 0 2px, transparent 3px),
+    radial-gradient(circle at 0 0, rgba(243,239,228,.05) 0 1.5px, transparent 2.5px);
+  background-size: 28px 28px, 28px 28px;
+  background-position: 0 0, 14px 14px;
+}
+
+.btn {
+  border-radius: 0.75rem; padding: 0.75rem 1rem; font-weight: 600;
+  background: var(--color-cloth-2); color: var(--color-paper);
+  transition: transform .08s, opacity .15s;
+}
+.btn:active { transform: scale(.96); }
+.btn:disabled { opacity: .4; }
+.btn-primary { background: var(--color-saffron); color: var(--color-ink); }
+.btn-quiet { background: transparent; border: 1px solid rgba(169,166,211,.35); }
+.field {
+  width: 100%; border-radius: 0.75rem; padding: 0.75rem 1rem;
+  background: rgba(0,0,0,.28); border: 1px solid rgba(169,166,211,.3); color: var(--color-paper);
+  font-size: 16px;
+}
+.field:focus { outline: 2px solid var(--color-saffron); outline-offset: 1px; }
+button:focus-visible { outline: 2px solid var(--color-saffron); outline-offset: 2px; }
+
+/* cards sliding in from the player who threw them */
+@keyframes throw-0 { from { transform: translateY(150px) scale(1.15); opacity: .2; } }
+@keyframes throw-1 { from { transform: translateX(150px) scale(.9); opacity: .2; } }
+@keyframes throw-2 { from { transform: translateY(-150px) scale(.9); opacity: .2; } }
+@keyframes throw-3 { from { transform: translateX(-150px) scale(.9); opacity: .2; } }
+.throw-0 { animation: throw-0 .28s cubic-bezier(.2,.8,.3,1); }
+.throw-1 { animation: throw-1 .28s cubic-bezier(.2,.8,.3,1); }
+.throw-2 { animation: throw-2 .28s cubic-bezier(.2,.8,.3,1); }
+.throw-3 { animation: throw-3 .28s cubic-bezier(.2,.8,.3,1); }
+@keyframes rise { from { transform: translateY(14px); opacity: 0; } }
+.rise { animation: rise .2s ease-out; }
+
+@media (prefers-reduced-motion: reduce) {
+  .throw-0, .throw-1, .throw-2, .throw-3, .rise { animation: none; }
+}
